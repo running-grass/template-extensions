@@ -14,7 +14,7 @@
 				"https://*/*"
 			],
 			"js": [
-				"content_script.js"
+				"contentScript.js"
 			]
 		}
 	],

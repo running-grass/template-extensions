@@ -49,13 +49,8 @@ export class MyElement extends LitElement {
   }
 }
 
-const contailerId = `container-${Date.now()}`
-
-const section = document.createElement("my-element")
-section.id = contailerId
-section.style.position = 'fixed'
-section.style.bottom = '0'
-section.style.left = '0'
-
-document.body.appendChild(section)
-
+declare global {
+  interface HTMLElementTagNameMap {
+    'my-element': MyElement
+  }
+}

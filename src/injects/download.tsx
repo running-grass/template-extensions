@@ -1,61 +1,34 @@
-import { html, css, LitElement } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
-
-/**
- * An example element.
- *
- * @slot - This element has a slot
- * @csspart button - The button
- */
-@customElement('my-element')
-export class MyElement extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-      border: solid 1px gray;
-      padding: 16px;
-      max-width: 800px;
-    }
-  `
-
-  /**
-   * The name to say "Hello" to.
-   */
-  @property()
-  name = 'World'
-
-  /**
-   * The number of times the button has been clicked.
-   */
-  @property({ type: Number })
-  count = 0
-
-  render() {
-    return html`
-      <h1>Hello, ${this.name}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
-      </button>
-      <slot></slot>
-    `
-  }
-
-  private _onClick() {
-    this.count++
-  }
-
-  foo(): string {
-    return 'foo'
-  }
-}
+import ReactDOM from "react-dom";
+import React, { useCallback } from 'react'
 
 const contailerId = `container-${Date.now()}`
 
-const section = document.createElement("my-element")
+const section = document.createElement("section")
 section.id = contailerId
-section.style.position = 'fixed'
-section.style.bottom = '0'
-section.style.left = '0'
-
 document.body.appendChild(section)
 
+
+function App() {
+
+  const onClick = useCallback(() => {
+    alert('已下载……')
+  })
+
+  return (
+    <div id="downloadBtn" style={{
+      position: 'fixed', left: 0, bottom: 0, padding: "5px 10px",
+      background: 'pink',
+      'borderRadius': '5px',
+      'zIndex': 10000,
+    }}>
+      开始时间： <input type="date" id="grass-start-time" />
+      <br />
+      结束时间： <input type="date" id="grass-end-time" />
+      <br />
+      <button id="grass-down-resume" onClick={onClick}>下载</button>
+    </div>
+  )
+}
+
+const domContainer = document.querySelector(`#${contailerId}`);
+ReactDOM.render(<App />, domContainer);
